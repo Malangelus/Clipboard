@@ -1,0 +1,128 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  ClipboardRetrieve:
+    description: ClipboardRetrieve media type (default view)
+    example:
+      value: Facilis repudiandae.
+    properties:
+      value:
+        example: Facilis repudiandae.
+        type: string
+    title: 'Mediatype identifier: application/vnd.clipboard.retrieve; view=default'
+    type: object
+  ClipboardStore:
+    description: ClipboardStore media type (default view)
+    example:
+      guid: Velit quibusdam quae facilis voluptatum est.
+    properties:
+      guid:
+        example: Velit quibusdam quae facilis voluptatum est.
+        type: string
+    title: 'Mediatype identifier: application/vnd.clipboard.store; view=default'
+    type: object
+host: localhost:8080
+info:
+  description: HTTP Clipboard API
+  title: Clipboard API
+  version: ""
+paths:
+  /retrieve:
+    post:
+      description: Stores a string value in memory
+      operationId: actions#retrieve#1
+      parameters:
+      - description: guid corresponding to a stored value
+        in: query
+        name: guid
+        required: false
+        type: string
+      produces:
+      - application/vnd.clipboard.retrieve
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ClipboardRetrieve'
+      schemes:
+      - http
+      summary: retrieve actions
+      tags:
+      - actions
+  /retrieve/{guid}:
+    get:
+      description: Stores a string value in memory
+      operationId: actions#retrieve
+      parameters:
+      - description: guid corresponding to a stored value
+        in: path
+        name: guid
+        required: true
+        type: string
+      produces:
+      - application/vnd.clipboard.retrieve
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ClipboardRetrieve'
+      schemes:
+      - http
+      summary: retrieve actions
+      tags:
+      - actions
+  /store:
+    post:
+      description: Stores a string value in memory
+      operationId: actions#store#1
+      parameters:
+      - description: Value to be stored
+        in: query
+        name: value
+        required: false
+        type: string
+      produces:
+      - application/vnd.clipboard.store
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ClipboardStore'
+      schemes:
+      - http
+      summary: store actions
+      tags:
+      - actions
+  /store/{value}:
+    get:
+      description: Stores a string value in memory
+      operationId: actions#store
+      parameters:
+      - description: Value to be stored
+        in: path
+        name: value
+        required: true
+        type: string
+      produces:
+      - application/vnd.clipboard.store
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ClipboardStore'
+      schemes:
+      - http
+      summary: store actions
+      tags:
+      - actions
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+schemes:
+- http
+swagger: "2.0"
